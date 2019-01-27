@@ -1,0 +1,102 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Smyols and Abrevations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%
+% Shortcuts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand{\eg}{e.\,g. }
+%\newcommand{\st}{s.\,t. }
+%\newcommand{\ie}{i.\,e. }
+
+
+
+%
+% Acronyms
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{acronym}
+\newcommand{\newacronym}[3]{\acrodef{#1}[#2]{#3}}
+\newacronym{GLA}{GLA}{gust load alleviation}
+\newacronym{MIMO}{MIMO}{multiple inputs and multiple outputs}
+\newacronym{SISO}{SISO}{single input and single output}
+\newacronym{SIMO}{SIMO}{single input and multiple outputs}
+\newacronym{MISO}{MISO}{multiple inputs and single output}
+\newacronym{LTI}{LTI}{linear time-invariant}
+\newacronym{SVD}{SVD}{singular value decomposition}
+\newacronym{HSV}{HSV}{Hankel singular value} \acrodefplural{HSV}[HSVs]{Hankel singular values}
+\newacronym{VCCTEF}{VCCTEF}{variable camber continous trailing edge flap}
+\newacronym{CO}{CO}{controllability and observability}
+\newacronym{RPD}{RPD}{real principal direction} \acrodefplural{RPD}[RPDs]{real principal directions}
+\newacronym{QCQP}{QCQP}{quadratically constrained quadratic program} 
+\newacronym{SQP}{SQP}{sequential quadratic programming} 
+\newacronym{IMU}{IMU}{intertial measurement unit} \acrodefplural{IMU}[IMUs]{intertial measurement units}
+%\newacronym{1WB}{$\nth{1}$SWBM}{first symmetric wing bending mode} 
+\newacronym{WRBM}{WRBM}{wing root bending moment}
+
+%
+% Math
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\vec}[1]{\bm{#1}}
+\newcommand{\mat}[1]{\bm{#1}}
+
+\DeclareMathOperator{\trace}{Tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\sign}{sgn}
+\DeclareMathOperator{\rank}{rank}
+
+\usepackage{xparse}
+\NewDocumentCommand{\daesym}{O{}mm}{#1{\dot{#2}}_\mathit{#3}}
+\NewDocumentCommand{\daesymb}{O{}mm}{#1{\dot{\overline{#2}}}_\mathit{#3}}
+\NewDocumentCommand{\daesymt}{O{}mm}{#1{\dot{\tilde{#2}}}_\mathit{#3}}
+\NewDocumentCommand{\aesym}{O{}mm}{#1{#2}_\mathit{#3}}
+\NewDocumentCommand{\aesymt}{O{}mm}{#1\tilde{{#2}}_\mathit{#3}}
+\NewDocumentCommand{\aesymb}{O{}mm}{#1\overline{{#2}}_\mathit{#3}}
+
+%\NewDocumentCommand{\aevec}{O{}mm}{#1{\vec{#2}}_\mathit{#3}}
+%\NewDocumentCommand{\aevecb}{O{}mm}{#1{\overline{\vec{#2}}}_\mathit{#3}}
+%\NewDocumentCommand{\aevect}{O{}mm}{#1{\tilde{\vec{#2}}}_\mathit{#3}}
+\NewDocumentCommand{\aevec}{O{}mm}{#1{{#2}}_\mathit{#3}}
+\NewDocumentCommand{\aevecb}{O{}mm}{#1{\overline{{#2}}}_\mathit{#3}}
+\NewDocumentCommand{\aevect}{O{}mm}{#1{\tilde{{#2}}}_\mathit{#3}}
+
+
+%\NewDocumentCommand{\aemat}{O{}mm}{#1{\mat{#2}}_\mathit{#3}}
+%\NewDocumentCommand{\aematt}{O{}mm}{#1{\tilde{\mat{#2}}}_\mathit{#3}}
+\NewDocumentCommand{\aemat}{O{}mm}{#1{{#2}}_\mathit{#3}}
+\NewDocumentCommand{\aematt}{O{}mm}{#1{\tilde{{#2}}}_\mathit{#3}}
+
+%\NewDocumentCommand{\aemath}{O{}mm}{#1{\hat{\mat{#2}}}_\mathit{#3}}
+%\NewDocumentCommand{\aematb}{O{}mm}{#1{\overline{\mat{#2}}}_\mathit{#3}}
+\NewDocumentCommand{\aemath}{O{}mm}{#1{\hat{{#2}}}_\mathit{#3}}
+\NewDocumentCommand{\aematb}{O{}mm}{#1{\overline{{#2}}}_\mathit{#3}}
+
+
+\NewDocumentCommand{\daevec}{O{}mm}{#1{\dot{\vec{#2}}}_\mathit{#3}}
+\NewDocumentCommand{\daevect}{O{}mm}{#1{\dot{\tilde{\vec{#2}}}}_\mathit{#3}}
+\NewDocumentCommand{\norm}{mm}{\left\Vert{#1}\right\Vert_{#2}}
+\NewDocumentCommand{\Hnorm}{mm}{\left\Vert{#1}\right\Vert_{\mathcal{H}_{#2}}}
+\NewDocumentCommand{\tr}{m}{\trace{\left[ {#1} \right]}}
+\NewDocumentCommand{\real}{m}{\Re{\left( {#1} \right)}}
+\NewDocumentCommand{\imag}{m}{\Im{\left( {#1} \right)}}
+
+\usepackage{siunitx}
+\sisetup{per-mode=symbol}
+%\DeclareSIUnit{\feet}{ft}
+%\DeclareSIUnit{\hertz}{Hz}
+
+
+
+%
+% Other
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\newcommand{\eqrref}[2]{(\ref{#1})\,--\,(\ref{#2})} % range
+
+%\newtheorem{proposition}{Proposition} 
+%\newtheorem{theorem}{Theorem} 
+
+
+

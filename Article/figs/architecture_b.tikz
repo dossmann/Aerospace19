@@ -1,0 +1,89 @@
+\usetikzlibrary{positioning,plotmarks, matrix, arrows, calc, shapes}
+\tikzstyle{blockdiag}	= [node distance=12mm, >=stealth', semithick]
+\tikzstyle{block}			= [draw, rectangle, minimum width=1.7cm, minimum 
+height=0.7cm]
+\tikzstyle{point}			= [draw,circle,inner sep=0pt, minimum size=0pt]
+\tikzstyle{sum} = [draw,circle,inner sep=0pt, minimum size=6pt]
+\tikzstyle{connector} = [draw,circle,inner sep=0pt, minimum size=2pt, 
+fill=black]
+\tikzstyle{gain} = [draw,regular polygon, regular polygon 	sides=3,thick,minimum height=3em,minimum width=4em, rotate=30]
+\tikzstyle{bguide} = [rectangle,minimum height=3em,minimum	width=4em]
+\tikzstyle{line} = [thick]
+\tikzstyle{branch} = [circle,inner sep=0pt,minimum size=1mm,fill=black,draw=black]
+\tikzstyle{guide} = [anchor=center]
+
+
+\definecolor{blue}{rgb}{0.00000,0.44700,0.74100}%
+\definecolor{red}{rgb}{0.85000,0.32500,0.09800}%
+\definecolor{gr1}{rgb}{0.55,0.55,0.55}%
+
+\footnotesize
+\begin{tikzpicture}[blockdiag, auto]
+
+% Blocks
+\node at (0,5) (Autothrottle) {\! \!};
+	%\draw[->] ($(Autothrottle.south)+(-8mm,-3mm)$)  -- ++(-0.6cm,0) node[pos=0,right] {$V_\text{ias}$}  |- ($(Autothrottle.south west)!0.25!(Autothrottle.north west)$);
+	%\draw[->] (Autothrottle.east)  -- ++(.2cm,0) node[pos=1,right] {$\delta_\text{th}$};
+
+\node[block] at (-2.7,5) (Autothrottle2) {\!Autothrottle\!};
+	\draw[->] ($(Autothrottle2.south)+(-8mm,-3mm)$)  -- ++(-0.6cm,0) node[pos=0,right] {$V_\text{ias}$}  |- ($(Autothrottle2.south west)!0.25!(Autothrottle2.north west)$);
+	
+
+\node[block, right of=Autothrottle, xshift=-1.9cm, minimum width=1cm]  (map) {\!Mapping\!};
+	\draw[->] (map.east)  -- ++(1.17cm,0) node[pos=1,right] {$\delta_\omega$};
+	\draw[->] (Autothrottle2.east)  -- (map.west) node[pos=.5,above] {$\delta_\text{th}$};
+	
+	
+\node[block,below of=Autothrottle, yshift=-0.75cm, text width=1.6cm,minimum height=1.5cm,align=center] (Pitch Tracker) {Pitch-Attitude \tiny{ $\nearrow:V_{\text{ias}}$}};
+	\draw[->] ($(Pitch Tracker.south)+(-8mm,-3mm)$)  -- ++(-0.6cm,0) node[pos=0,right] {$\Theta,q$}  |- ($(Pitch Tracker.south west)!0.25!(Pitch Tracker.north west)$);
+	\draw[->] (Pitch Tracker.east)  -- ++(0.2cm,0) node[pos=1,right] {$\delta_\text{e}$};
+
+\node[block,below of=Pitch Tracker, yshift=-1.1cm, text width=1.6cm, minimum height=1.5cm,align=center] (Lat Tracker) {Lateral-Directional \tiny{ $\nearrow:V_{\text{ias}}$}};
+	\draw[->] ($(Lat Tracker.south)+(-8mm,-3mm)$)  -- ++(-0.6cm,0) node[pos=0,right] {$\Phi, p, \beta$}  |- ($(Lat Tracker.south west)!0.25!(Lat Tracker.north west)$);
+	\draw[->] ($(Lat Tracker.south east)!0.75!(Lat Tracker.north east)$)  -- ++(0.2cm,0) node[pos=1,right] {$\delta_\text{a}$};
+	\draw[->] ($(Lat Tracker.south east)!0.25!(Lat Tracker.north east)$)  -- ++(0.2cm,0) node[pos=1,right] {$\delta_\text{r}$};
+
+\node[block,left of=Pitch Tracker, xshift=-1.8cm,  text width=1.45cm, yshift=0.38cm, align=center] (h Tracker) {Altitude \tiny{ $\nearrow:V_{\text{ias}}$}};
+	\draw[->] ($(h Tracker.south)+(-8mm,-2.5mm)$)  -- ++(-0.5cm,0) node[pos=0,right] {$H$} |- ($(h Tracker.south west)!0.25!(h Tracker.north west)$);
+	\draw[->]  ($(h Tracker.south east)!0.5!(h Tracker.north east)$) -- ($(Pitch Tracker.south west)!0.75!(Pitch Tracker.north west)$) node[pos=0.7] {$\Theta_{\text{ref}}$};
+
+\node[block,left of=Lat Tracker, xshift=-1.8cm, yshift=0.35cm,  text width=1.97cm ,align=center] (Course tracker) {Course Angle  \tiny{$\nearrow:V_{\text{ias}}$} };
+	\draw[->] ($(Course tracker.south)+(-8mm,-3mm)$)  -- ++(-0.5cm,0) node[pos=0,right] {$\chi$} |- ($(Course tracker.south west)!0.25!(Course tracker.north west)$);
+	\draw[->]  (Course tracker.east) -- ($(Lat Tracker.south west)!0.73!(Lat Tracker.north west)$) node[pos=0.7,above] {$\Phi_{\text{ref}}$};
+
+
+
+% OUTER LOOP
+\node[block,left of=Autothrottle, xshift=-4.6cm, yshift=-0.426cm,minimum width=1.6cm,minimum height=2cm,text width=1.6cm,align=center] (NAV) {Navigation Commands};
+	\draw[->] ($(NAV.south)+(-8mm,-3mm)$)  -- ++(-0.4cm,0) node[pos=0,right] {$x_a, y_a,\chi$}  |- ($(NAV.south west)!0.15!(NAV.north west)$);
+	
+%\node[block,above of=NAV, yshift=0.35cm,minimum width=2cm] (Flare) {Flare};
+	%\draw[->] ($(Flare.south)+(-8mm,-3mm)$)  -- ++(-0.6cm,0) node[pos=0,right] {$H$}  |- ($(Flare.south west)!0.5!(Flare.north west)$);
+	
+%\node[block,below of=LOC, yshift=-3.0mm,minimum width=2cm] (Decrab) {Decrab};
+	%\draw[->] ($(Decrab.south)+(-8mm,-3mm)$)  -- ++(-0.6cm,0) node[pos=0,right] {$\Psi$}  |- ($(Decrab.south west)!0.5!(Decrab.north west)$);	
+
+
+
+%\draw[->] ($(Autothrottle.south west)!0.75!(Autothrottle.north west)$) ++(-0.5cm,0cm) -- ($(Autothrottle.south west)!0.75!(Autothrottle.north west)$) node[pos=0,left] {$V_\text{ref}$};
+\draw[->]   ($(NAV.south east)!0.5!(NAV.north east)$) -- ++ (4mm,0mm) |- ($(h Tracker.south west)!0.75!(h Tracker.north west)$) node[pos=0.75] {$H_{\text{ref}}$};
+\draw[->]  ($(NAV.south east)!0.2!(NAV.north east)$) -- ++ (2mm,0mm) |- ($(Course tracker.south west)!0.75!(Course tracker.north west)$) node[pos=.73]{$\chi_{\text{ref}}$};
+\draw[->]  ($(NAV.south east)!0.8!(NAV.north east)$) -- ++ (7mm,0mm) |-  ($(Autothrottle2.south west)!0.75!(Autothrottle2.north west)$) node[pos=0.65]{$V_\text{ref}$};
+
+\node[point, left of = Autothrottle, xshift=1.5cm, yshift=-.5cm, color=gr1](p1){};
+\draw[color=gr1, dotted,->]  (p1.north)  -- ++(-0mm,4mm)  node[pos=0.3,below]  {$\delta_{\omega,\text{p}}$} -- ++(3.5mm,3.5mm);
+\node[point, left of = Pitch Tracker, xshift=-.8cm, yshift=-.15cm, color=gr1](p2){};
+\draw[color=gr1, dotted,->]  (p2.north) -- ++(-0mm,4mm)  node[pos=0.3,below]  {$\Theta_\text{ref,p}$} -- ++(3.5mm,3.5mm);
+\node[point, left of = Lat Tracker, xshift=-.62cm, yshift=-.15cm, color=gr1](p3){};
+\draw[color=gr1, dotted,->]  (p3.north) -- ++(-0mm,3.5mm) -- ++(3.5mm,3.5mm);
+
+\node[block,below of=NAV, xshift=-.5cm, yshift=-3.5cm, draw opacity = .35, text=gr1,minimum height=.9cm, minimum width = 1.2cm] (pilot) {Pilot};
+\draw[-, color=gr1, dotted] ($(pilot.south east)!0.8!(pilot.north east)$)  -- ++(.8cm,0) node[pos=1,right] {$\delta_{\omega,\text{p}}$};
+\draw[-, color=gr1, dotted] ($(pilot.south east)!0.5!(pilot.north east)$)  -- ++(.8cm,0) node[pos=1,right] {$\Theta_\text{ref,p}$};
+\draw[-, color=gr1, dotted] ($(pilot.south east)!0.2!(pilot.north east)$)  -| (p3.south) node[pos=.6,right, left] {$\Phi_\text{ref,p}$};
+\draw[->, color=gr1, dotted] ($(pilot.south east)!0.8!(pilot.north east)$)  -- ++(0.4cm,0) node[pos=1,right]{ };
+\draw[->, color=gr1, dotted] ($(pilot.south east)!0.5!(pilot.north east)$)  -- ++(0.4cm,0) node[pos=1,right]{ };
+\draw[->, color=gr1, dotted] ($(pilot.south east)!0.2!(pilot.north east)$)  -- ++(0.4cm,0) node[pos=1,right]{ };
+
+
+\end{tikzpicture}
