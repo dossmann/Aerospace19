@@ -148,7 +148,7 @@ $^{2}$ \quad Systems and Control Lab, Institute for Computer Science and Control
 %\abstract{A single paragraph of about 200 words maximum. For research articles, abstracts should give a pertinent overview of the work. We strongly encourage authors to use the following style of structured abstracts, but without headings: 1) Background: Place the question addressed in a broad context and highlight the purpose of the study; 2) Methods: Describe briefly the main methods or treatments applied; 3) Results: Summarize the article's main findings; and 4) Conclusion: Indicate the main conclusions or interpretations. The abstract should be an objective representation of the article, it must not contain results which are not presented and substantiated in the main text and should not exaggerate the main conclusions.}
 
 % Abstract 
-\abstract{This article presents the model based design and verification of the flight control system of a highly flexible flutter demonstrator developed in the European FLEXOP project. The flight control system includes a baseline controller to operate the aircraft fully autonomously and an flutter suppression controller to stabilize the unstable aeroelastic modes and extend the aircraft's operational range. The baseline control system features a classical cascade flight control structure with scheduled control loops to augment the lateral and longitudinal axis of the aircraft. The flutter suppression controller uses an advanced blending technique to blend the flutter relevant sensor and actuator signals. These blends decouple the unstable modes from each other and allow controlling them individually by scheduled single loop controllers. For the tuning of the free parameters in the defined controller structures, a model based approach is presented, solving multi-objective, non-linear optimization problems via non-smooth optimization techniques. The developed control system, including baseline and flutter control algorithms, is verified in an extensive simulation campaign using a high fidelity, non-linear simulator of the flutter demonstrator.
+\abstract{This article presents the model based design and verification of the flight control system of a highly flexible flutter demonstrator developed in the European FLEXOP project. The flight control system includes a baseline controller to operate the aircraft fully autonomously and a flutter suppression controller to stabilize the unstable aeroelastic modes and extend the aircraft's operational range. The baseline control system features a classical cascade flight control structure with scheduled control loops to augment the lateral and longitudinal axis of the aircraft. The flutter suppression controller uses an advanced blending technique to blend the flutter relevant sensor and actuator signals. These blends decouple the unstable modes from each other and allow controlling them individually by scheduled single loop controllers. For the tuning of the free parameters in the defined controller structures, a model based approach is presented, solving multi-objective, non-linear optimization problems via non-smooth optimization techniques. The developed control system, including baseline and flutter control algorithms, is verified in an extensive simulation campaign using a high fidelity, non-linear simulator of the flutter demonstrator.
 }
 
 
@@ -161,7 +161,7 @@ $^{2}$ \quad Systems and Control Lab, Institute for Computer Science and Control
 
 
 \section{Introduction}
-Today's aircraft manufacturers are eager to fulfill the greener imperative demanded by society and allow for a more economic operation of aircraft. Besides the efficiency of engines and aerodynamics, the aircraft weight and the wing aspect ratio have a major impact on the fuel consumption. A reduction of aircraft weight is achieved by using new materials like carbon composites, as it has been successfully achieved for example with the Airbus A350 or the Boeing 787, where a higher aspect ratio yields a reduced aerodynamic drag. These  approaches, however, decrease the aircraft velocity at which undesired effects like flutter, i.e. the unstable coupling between the aerodynamics and the aircraft structure, occur. If the trend of reducing the aircraft structure is continued, these effects will appear within the desired flight envelopes.  Possible countermeasures are active control techniques which allow for stabilizing these unstable dynamics and extending the operational region of the aircraft. 
+Today's aircraft manufacturers are eager to fulfill the greener imperative demanded by society and allow for a more economic operation of aircraft. Besides the efficiency of engines and aerodynamics, the aircraft weight and the wing aspect ratio have a major impact on the fuel consumption. A reduction of aircraft weight is achieved by using new materials like carbon composites, as it has been successfully achieved for example with the Airbus A350 or the Boeing 787, where higher aspect ratios yield reduced aerodynamic drags. These  approaches, however, decrease the aircraft velocity at which undesired effects like flutter, i.e. the unstable coupling between the aerodynamics and the aircraft structure, occur. If the trend of reducing the aircraft structure is continued, these effects will appear within the desired flight envelopes.  Possible countermeasures are active control techniques which allow for stabilizing these unstable dynamics and extending the operational region of the aircraft. 
 Such advanced control algorithms require model based design methods which call for adequate models of the aeroservorelastic effects. Thus, the design of flutter suppression controllers is a challenging task and has raised attention to the academic community, see for example \cite{Theis16,Danowsky17,Danowsky18} for valuable contributions. In this article, the design of a flight control system including the baseline and flutter suppression controller for a highly flexible flutter demonstrator is presented. The considered aircraft, depicted in Figure \ref{fig:ac}, is the main demonstrator of the Horizon 2020 project Flutter Free FLight Envelope eXpansion for ecOnomic Performance improvement (FLEXOP) to develop and test active flutter suppression control algorithms \cite{Stahl17,Roessler19}.
 
 
@@ -178,12 +178,12 @@ In Section \ref{sec:blend} of this article,  we present a new systematic  approa
 By defining the structure of the controllers in advance, the design of the flutter suppression controller as well as the baseline controller boils down to the  selection of adequate control gains. For this selection a model based approach using robust control techniques is proposed in Section \ref{sec:opt}. Two generic control design problems are defined:  The first problem defines a multi-model, multi-objective optimization for deriving a controller which is robust against parameter variations. The second design is posted as parametric multi-objective problem for designing gain-scheduled controllers. Both problems can be solved using non-smooth optimization based on robust control algorithms \cite{Apkarian06}.  In the case of the gain-scheduled controller, this approach enables the direct determination of the controller parameters over the entire flight envelope in a single design step, i.e., avoiding the classically applied point-wise design. 
 The presented tool chain for the controller design is applied to the FLEXOP flutter demonstrator in Section \ref{sec:appl}.
 A detailed overview of the baseline controller functionality and the employed loops and design criteria is provided. Further, the application of the proposed blending vector design and parameter tuning to derive the flutter suppression controller is discussed, providing valuable insight to the reader on how such algorithms are developed.
-The designed flight control system of the FELXOP flutter demonstrator is verified in an extensive verification campaign and its results are reported in Section \ref{sec:verif}. For the verification campaign a high fidelity, non-linear simulator of the closed-loop aircraft \cite{Wuestenhagen18,Meddaikar19}, including structural and aerodnymical effects as well as detailed actuator, sensor and engine models, is available.
+The designed flight control system of the FELXOP flutter demonstrator is verified in an extensive verification campaign and its results are reported in Section \ref{sec:verif}. For the verification campaign a high fidelity, non-linear simulator of the closed-loop aircraft \cite{Wuestenhagen18,Meddaikar19}, including structural and aerodynamic  effects as well as detailed actuator, sensor and engine models, is available.
 The verification includes wind scenarios to test the disturbance attenuation, acceleration scenarios to verify the stabilization capabilities of the active flutter control algorithm, and  flights along the predefined flight test pattern on which the real flight tests will be performed.
 
 \section{$\mathcal{H}_{2}$-Optimal Input and Output Blending}\label{sec:blend}
 In this section the theoretical background to optimally blend  inputs and outputs of a system is provided. The approach blends the inputs and outputs in a way, that the controllability and observability of the mode to be controlled is maximized in terms of the $\mathcal{H}_{2}$-norm. 
-For aeroelastic control problems, this approach is especially applicable since no model order reduction of the typically high dimensional aerolastic model is required. Furthermore, a high number of sensors, e.g. strain or acceleration measurements, are available and need to be fused accordingly within the control algorithm. 
+For aeroelastic control problems, this approach is especially applicable since no model order reduction of the typically high dimensional aeroelastic model is required. Furthermore, a high number of sensors, e.g. strain or acceleration measurements, are available and need to be fused accordingly within the control algorithm. 
 
 
 \subsection{Modal Control of Linear Time-Invariant Systems}
@@ -273,7 +273,7 @@ $\aemat{C}{}(s)=\diag{\left( \aesym{c}{1}(s), \cdots , \aesym{c}{n_j}(s) \right)
 %
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{$\mathcal{H}_2$-optimal Blending Vector Design}
+\subsection{$\mathcal{H}_2$-Optimal Blending Vector Design}
 \label{sec:contrObs}
 
 
@@ -443,7 +443,7 @@ Solving $\max_{\phi} \norm{\aemat{F}{}(\phi)}{2}$ yields an optimal phase angle 
 Hence, the number of optimization variables is reduced from $n_u+n_y$ to a single one, or, in other words, the  difficulty of finding a solution of (\ref{eq:opt}) becomes independent of the actual number of inputs and outputs.
 Finally, the optimization problem (\ref{eq:opt}) has been transformed to the numerically tractable problem (\ref{eq:reform}). The latter can be easily solved using readily available numerical software tools, further discussed and described in \cite{Pusch18a}.
 
-In case the mode $M(s)$ is unstable, the corresponding $\mathcal{H}_2$-norm becomes infinite and the optimization problem \eqref{eq:opt} can not be solved. Considering the definition of the $\mathcal{H}_2$-norm for asymptotically stable systems \cite{Skoge_05}, it becomes maximum iff the integral over the (squared) magnitude of the frequency response becomes a maximum. For an unstable mode, this integral can also be computed by exploiting the fact that  the magnitude is not affected when mirroring the unstable pole(s) across the imaginary axis. As a result, an asymptotically stable system is obtained for which the $\mathcal{H}_2$-norm can easily be computed. 
+In case the mode $M(s)$ is unstable, the corresponding $\mathcal{H}_2$-norm becomes infinite and the optimization problem \eqref{eq:opt} cannot be solved. Considering the definition of the $\mathcal{H}_2$-norm for asymptotically stable systems \cite{Skoge_05}, it becomes maximum iff the integral over the (squared) magnitude of the frequency response becomes a maximum. For an unstable mode, this integral can also be computed by exploiting the fact that  the magnitude is not affected when mirroring the unstable pole(s) across the imaginary axis. As a result, an asymptotically stable system is obtained for which the $\mathcal{H}_2$-norm can easily be computed. 
 Based on that, it is proposed to design the blending vectors of an unstable mode by first mirroring the underlying poles across the imaginary axis and then applying the algorithm described above. Note that in order to preserve the magnitude of the frequency response when mirroring a pole, the zeros of each individual transfer channel need to be preserved which typically affects the corresponding residue(s).
 
 
@@ -517,7 +517,7 @@ k_l = z_{0,l} + z_{1,l} \pi + \dots + z_{n_q,l} \pi^{\circ n_q},
 where $n_q$ defines the  polynomial order of the basis function. The vectors $z_{q,l}$ with $q = 1,\dots,n_q$ and $l = 1,\dots, n_l$, are constant and have the size $1 \times n_p$. The notation $\circ$ is used to indicate that the exponent is used on each element of the parameter vector $\pi$. For the control designs herein the indicated airspeed is the only  scheduling parameter of the controller, i.e., $\pi = V_{\text{ias}}$ and $n_p = 1$. Also, the scheduling parameter of the controller is equal to the  parameter of the underlying LPV design model described in (\ref{eq:model1}), i.e., $\rho = \pi = V_{\text{ias}}$. 
 
 
-\subsection{Design requirements}
+\subsection{Design Requirements}
 The soft and hard design constraints $f$ and $g$ in (\ref{eq:problem1}) and (\ref{eq:problem2}), respectively,  are defined using classical control objectives in the frequency and time domain. This includes desired bandwidth, robustness margins, overshoot, tracking error, rise time, maximum loop gains, and desired loop shapes.
 Another possibility used in this article is to provide a \textit{reference model} and use the error between this reference model and the resulting dynamics as criteria to be minimized in either (\ref{eq:problem1}) or (\ref{eq:problem2}). Such a model matching setup provides an elegant way to get as close as possible to the desired dynamics over the whole parameter range.
 
@@ -641,7 +641,7 @@ With the baseline controller structure available, the next step is to tune the f
 \subsection{Flutter Suppression Controller}
 
 
-The two flutter modes mainly limiting the operational velocity range of the aircraft can be well distinguished by its symmetric and asymmetric mode shapes. Both modes describe a dynamic coupling of the wing bending and torsion which becomes unstable above a certain airspeed.
+The two flutter modes mainly limiting the operational velocity range of the aircraft can be well distinguished by its symmetric and asymmetric mode shapes. Both modes describe a dynamic coupling of the wing bending and torsion which becomes unstable above certain airspeeds.
 To individually stabilize the two flutter modes, the $\mathcal{H}_2$-optimal blending approach proposed in Section \ref{sec:blend} is applied to the FLEXOP demonstrator. In doing so, the flutter modes are decoupled which allows for a straight forward design of two dedicated SISO control loops, one for each flutter mode. 
 
 
@@ -649,12 +649,12 @@ To individually stabilize the two flutter modes, the $\mathcal{H}_2$-optimal ble
 
 
 The measurement signals considered for flutter suppression are captured by the inertia measurement unit (\acp{IMU}) located in the wings and in the center of gravity, where only vertical acceleration and pitch rate measurements are used for the controller design herein.
-In Figure \ref{fig:sens}, the location of the \acp{IMU} in the wings are depicted as well as the location of the ailerons, of which only the outer pair is used for flutter suppression.
+In Figure \ref{fig:sens}, the location of the \acp{IMU} in the wings together with the location of the ailerons, of which only the outer pair is used for flutter suppression.
 %
 \begin{figure}[!h]	
 	\centering
 	\includegraphics[width=0.75\linewidth]{figs/SensorPos}
-	\caption{Locations of the \acp{IMU} installed in the wings.}
+	\caption{Locations of the \acp{IMU} installed in the wings to measure the accelerations on the wing.}
 	\label{fig:sens}
 \end{figure}
 %
@@ -718,7 +718,7 @@ The two optimization problems to design the two SISO controllers have the form (
 
 
 
-Closing the two SISO loops stabilizes the two flutter modes as it is illustrated in the pole migration plot in Figure  \ref{fig:poles}. The plot compares the open-loop poles in gray to the closed-loop poles depicted in color in dependence of the airspeed. Clearly visible is the unstable behavior, i.e., the crossing to the right half plain of the first (symmetric) and second (asymmetric) flutter mode in the open-loop. With the flutter suppression controller the symmetric flutter mode can be stabilized up to an airspeed of 65.5\,m/s. The asymmetric mode is stabilized even beyond  70\,m/s. Demanding additional single-loop robustness margins of 6\,dB in gain and \SI{45}{\degree} in phase to the critical point, leads to a maximum operational speed of about 60\,m/s. This still results in an increase in allowable speed of more than 15\,\% compared to the case without active flutter suppression. Also noticeable is that the other poles of the system(s) are not largely effected by the flutter suppression controller. This is acceptable since damping is rather increased than decreased.
+Closing the two SISO loops stabilizes the two flutter modes as it is illustrated in the pole migration plot in Figure  \ref{fig:poles}. The plot compares the open-loop poles in gray to the closed-loop poles depicted in color in dependence of the airspeed. Clearly visible is the unstable behavior, i.e., the crossing to the right half plain of the first (symmetric) and second (asymmetric) flutter mode in the open-loop. With the flutter suppression controller the symmetric flutter mode can be stabilized up to airspeeds of 65.5\,m/s. The asymmetric mode is stabilized even beyond  70\,m/s. Demanding additional single-loop robustness margins of 6\,dB in gain and \SI{45}{\degree} in phase to the critical point, leads to a maximum operational speed of about 60\,m/s. This still results in an increase in allowable speed of more than 15\,\% compared to the case without active flutter suppression. Also noticeable is that the other poles of the system(s) are not largely affected by the flutter suppression controller. This is acceptable since damping is rather increased than decreased.
 
 %\begin{figure}[!h]	
 %	\centering
@@ -727,11 +727,10 @@ Closing the two SISO loops stabilizes the two flutter modes as it is illustrated
 %	\label{fig:polesx}
 %\end{figure}
 
-
 \begin{figure}[h]
 	\centering
 	\input{figs/poles.tikz}
-	\caption{Comparison of the open-loop poles in gray and closed-loop poles  (colored) in dependence of the indicated airspeed $V_{\textbf{ias}}$. Only the positive part of the imaginary axis is depicted for readability reasons.}
+	\caption{Comparison of the open-loop poles in gray and closed-loop poles  (colored) in dependence of the indicated airspeed $V_{\textbf{ias}}$. Only the positive imaginary axis is depicted for readability reasons.}
 	\label{fig:poles}	
 \end{figure}
 
@@ -741,6 +740,10 @@ The  linear analysis results discussed in this section provide an initial verifi
 The developed flight control system including the basic augmentation to autonomously fly the aircraft and the flutter control algorithm are verified in a non-linear simulator and a summary of the important results is provided in this section. The  baseline controller  shall work for both wing-set configurations, i.e., the rigid and the elastic one. A detailed description of the baseline control architecture and a coherent analysis with the rigid wing set is provided in \cite{Ossmann19a}. The advancement herein is to fly the aircraft with the flexible wing set beyond the flutter speeds of approximately 52\,m/s and 54\,m/s. Thus, the findings from the linear analysis in Section \ref{sec:appl} which indicate an extension of the flutter phenomena from 54\,m/s to 66\,m/s for the asymmetric flutter mode and from 52\,m/s to 70\,m/s for the symmetric flutter mode 
 are verified. Therefore, a simulation based verification using the developed high fidelity simulator presented in  \cite{Wuestenhagen18} is performed.  To provide some insight in the open-loops flutter behavior, i.e., without active flutter control, the aircraft is accelerated from its trim condition at 38\,m/s to 50\,m/s. From there on the speed is increased by 4\,m/s to enter the flutter region.
 
+
+
+Figure \ref{fig:ol} depicts the aircraft speed in the diagram (a), the aircraft's angle of attack in diagram (c), the vertical accelerations on the wing root of the left wing in diagram (b), and the vertical accelerations on the left wing tip in  diagram (d). The first step in the reference airspeed happens at 20\,s simulation time. The aircraft accelerates, leading to a reduction of the required angle of attack (c) to hold the altitude, and reaches the commanded speed of 50\,m/s. At 50\,s simulation time the reference speed is increased by 4\,m/s. The aircraft reaches the flutter speed and the wings start to oscillate, indicated in red (\ref{line:unstable}) in the diagrams of Figure \ref{fig:ol}. This leads to high accelerations on the wings, which is depicted in the diagrams (b) for the left wing root and in diagram (d) for the left wing tip. In reality, the aircraft would have been lost at this point, but the resulting non-linear behavior is not covered by the simulation.
+
 \begin{figure}[h]
 	\centering
 	\input{figs/d1_ol.tikz}
@@ -748,17 +751,17 @@ are verified. Therefore, a simulation based verification using the developed hig
 	\label{fig:ol}	
 \end{figure}
 
-Figure \ref{fig:ol} depicts the aircraft speed in the diagram (a), the aircraft's angle of attack in diagram (c), the vertical accelerations on the wing root of the left wing in diagram (b), and the vertical accelerations on the left wing tip in  diagram (d). The first step in the reference airspeed happens at 20\,s simulation time. The aircraft accelerates, leading to a reduction of the required angle of attack (c) to hold the altitude, and reaches the commanded speed of 50\,m/s. At 50\,s simulation time the reference speed is increased by 4\,m/s. The aircraft reaches the flutter speed and the wings start to oscillate, indicated in red (\ref{line:unstable}) in the diagrams of Figure \ref{fig:ol}. This leads to high accelerations on the wings, which is depicted in the diagrams (b) for the left wing root and in diagram (d) for the left wing tip. In reality, the aircraft would have been lost at this point, but the resulting non-linear behavior is not covered by the simulation.
 
-\begin{figure}[htb]
+In Figure \ref{fig:cl} the same scenario is simulated with the flutter suppression controller enabled. The velocity is increased  step-wise until flutter occurs. The aircraft is stabilized up to an indicated airspeed of about 65\,m/s, as predicted by the linear analysis. The accelerations on the wing are kept close to their trim conditions  by the flutter suppression controller. After initiating the velocity step from 64\,m/s to 66\,m/s the first symmetric flutter mode becomes unstable. This instability is indicated in the diagrams of Figure \ref{fig:cl} by the changing the line color to red.
+
+\begin{figure}[th]
 	\centering
 	\input{figs/d1_cl.tikz}
 	\caption{Simulation results for an acceleration scenario for indicated airspeed (a), angle of attack (c), accelerations on the wing tip (b) and the wing root (d) with flutter suppression controller. The flight in the stable regime is indicated in gray (\ref{line:stable}), the unstable situation in red (\ref{line:unstable}).}
 	\label{fig:cl}	
 \end{figure}
 
-In Figure \ref{fig:cl} the same scenario is simulated with the flutter suppression controller enabled. The velocity is increased  step-wise until flutter occurs. The aircraft is stabilized up to an indicated airspeed of about 65\,m/s, as predicted by the linear analysis. The accelerations on the wing are kept close to their trim conditions  by the flutter suppression controller. After initiating the velocity step from 64\,m/s to 66\,m/s the first symmetric flutter mode becomes unstable. This instability is indicated in the diagrams of Figure \ref{fig:cl} by the changing the line color to red.
-
+\newpage
 Next, the aircraft is simulated on the predefined flight test pattern.  For the description of the pattern we are assuming without loss of generality that the north direction is equal to the y-axis of the defined coordinate system. The main waypoint to be tracked is chosen before the turn of the actual flutter test. Thus, the inbound leg is dedicated to the waypoint tracking to ensure a uniform start of the outbound turn. 
 \begin{figure}[b!]
 	\centering
@@ -768,7 +771,7 @@ Next, the aircraft is simulated on the predefined flight test pattern.  For the 
 	\label{fig:d1_patt_fp}	
 \end{figure}
 After the outbound turn the aircraft reaches the outbound leg, on which the aircraft velocity is increased to test the active flutter control.  On the last part of the outbound leg the aircraft is decelerated to avoid flying the turns above the open-loop flutter speed. Overall, this results in four main segments, for which the reference signals need to be provided. To generate the reference signals  a state-machine with sub-tasks, which are selected based on switching criteria, is implemented.
-This state-machine together with the presented baseline and flutter suppression controller allow to navigate the aircraft around the test pattern fully autonomously. In Figure \ref{fig:d1_patt_fp} relevant flight parameters during a simulated flight of 200\,s along the described test pattern is depicted. In diagram (a) the longitudinal and lateral position of the aircraft is shown. The 200\,s flight time correspond to approximately two laps on the pattern. On the test leg of each lap the aircraft is brought into the open-loop flutter regime. The  indicated airspeed (\ref{line:com}) is depicted in diagram (c) together with it reference command (\ref{line:ref}). The pattern is flown with a nominal speed of 38\,m/s. On the test leg the speed is increased to 54\,m/s in the first lap and 58\,m/s in the second lap. The altitude is maintained by the control system at 348\,m shown in diagram (b). The visible spikes at about 65\,s and 160\,s in the altitude and airspeed are due to vertical wind gusts simulated on the test leg to verify the control system's robustness  against disturbances. The control system maintains the angle of side-slip around zero during the whole flight including the turn maneuvers. Thus, the baseline controller is able to adequately track the demanded values in the relevant flight parameters.
+This state-machine together with the presented baseline and flutter suppression controller allow navigating the aircraft around the test pattern fully autonomously. In Figure \ref{fig:d1_patt_fp} relevant flight parameters during a simulated flight of 200\,s along the described test pattern is depicted. In diagram (a) the longitudinal and lateral position of the aircraft is shown. The 200\,s flight time correspond to approximately two laps on the pattern. On the test leg of each lap the aircraft is brought into the open-loop flutter regime. The  indicated airspeed (\ref{line:com}) is depicted in diagram (c) together with it reference command (\ref{line:ref}). The pattern is flown with a nominal speed of 38\,m/s. On the test leg the speed is increased to 54\,m/s in the first lap and 58\,m/s in the second lap. The altitude is maintained by the control system at 348\,m shown in diagram (b). The visible spikes at about 65\,s and 160\,s in the altitude and airspeed are due to vertical wind gusts simulated on the test leg to verify the control system's robustness  against disturbances. The control system maintains the angle of side-slip around zero during the whole flight including the turn maneuvers. Thus, the baseline controller is able to adequately track the demanded values in the relevant flight parameters.
 
 
 
@@ -785,7 +788,7 @@ Diagram (d) depicts the deflections of the outer aileron pair between 164\,s and
 \end{figure}
 
 
-Figure \ref{fig:d1_patt_acc} depicts the resulting accelerations on the tip of the left wing in the vertical direction (\ref{line:v}) and horizontal direction (\ref{line:h}) , where the latter is directed into the flying direction. The flutter suppression controller is able to stabilize both flutter modes during the whole test, leading to deviations of $\pm15$\,m/s$^2$ from the trim point for the vertical accelerations and $\pm5$\,m/s$^2$ for the horizontal accelerations. To summarize the performed verification campaign, the developed control system including the baseline and flutter suppression controllers is able to satisfactorily navigate along the defined flight test pattern  and stabilize the flutter as predicted with the linear analysis also in wind scenarios. These results provide confidence that the developed system will also work satisfactorily during the real flight tests.
+Figure \ref{fig:d1_patt_acc} depicts the resulting accelerations on the tip of the left wing in the vertical direction (\ref{line:v}) and horizontal direction (\ref{line:h}), where the latter is directed into the flying direction. The flutter suppression controller is able to stabilize both flutter modes during the whole test, leading to deviations of $\pm15$\,m/s$^2$ from the trim point for the vertical accelerations and $\pm5$\,m/s$^2$ for the horizontal accelerations. To summarize the performed verification campaign, the developed control system including the baseline and flutter suppression controllers is able to satisfactorily navigate along the defined flight test pattern  and stabilize the flutter as predicted with the linear analysis also in wind scenarios. These results provide confidence that the developed system will also work satisfactorily during the real flight tests.
 
 
 
@@ -854,13 +857,13 @@ The baseline controller features a classical cascaded controller structure with 
 %\supplementary{The following are available online at \linksupplementary{s1}, Figure S1: title, Table S1: title, Video S1: title.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\authorcontributions{Conceptualization: D. Ossmann, M. Pusch and T. Luspay; methodology and software: M. Pusch and T. Luspay; validation: D. Ossmann and T. Luspay; writing—original draft preparation: D. Ossmann; writing—review and editing: D. Ossmann, M. Pusch and T. Luspay; visualization:  M. Pusch and D. Ossmann; supervision: D. Ossmann.}
+\authorcontributions{The authors jointly developed the flight control system for the FLEXOP demonstrator and jointly wrote this article. In detail: conceptualization: D. Ossmann, M. Pusch and T. Luspay; methodology and software: M. Pusch and T. Luspay; validation: D. Ossmann and T. Luspay; writing—original draft preparation: D. Ossmann; writing—review and editing: D. Ossmann, M. Pusch and T. Luspay; visualization:   D. Ossmann and M. Pusch; supervision: D. Ossmann.}
 
 % Example: Jean-Marc Biannic and Clément Roos jointly developed the nonlinear aircraft model and the flare control design methodology; the controller gains tuning and nonlinear simulations were initially performed by Jean-Marc Biannic and then updated by Clément Roos; Jean-Marc Biannic and Clément Roos jointly wrote the paper and its revised version.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\funding{This work was performed in the framework of the European Union's Horizon 2020 research and innovation programme and is part of the Flutter Free FLight Envelope eXpansion for ecOnomic Performance improvement (FLEXOP) project with the  grant agreement No 636307. T. Luspay Acknowledges the support by the Janos Bolyai Research Scholarship of the Hungarian Academy of Sciences.}
+\funding{This work was performed in the framework of the European Union's Horizon 2020 research and innovation programme and is part of the Flutter Free FLight Envelope eXpansion for ecOnomic Performance improvement (FLEXOP) project with the  grant agreement No 636307. T. Luspay acknowledges the support by the Janos Bolyai Research Scholarship of the Hungarian Academy of Sciences.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\acknowledgments{In this section you can acknowledge any support given which is not covered by the author contribution or funding sections. This may include administrative and technical support, or donations in kind (e.g., materials used for experiments).}
