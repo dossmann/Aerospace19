@@ -1,0 +1,93 @@
+\documentclass{article}
+\usepackage{graphicx,color}
+\usepackage[scale=0.70]{geometry}
+\usepackage{enumitem}
+\usepackage{soul}
+\newcommand{\e}[1]{{\color{red}#1}}
+
+
+\begin{document}
+
+\title{\textsf{Response to Reviewer \#1 } \\ [+2mm]  \small{Structured Control Design for a Highly Flexible Flutter Demonstrator}
+\\ [+2mm]
+M. Pusch, D. Ossmann, and T. Luspay}
+
+\date{}
+\maketitle
+
+\textbf{We'd like to  thank the reviewer for spending his or her valuable time to review our article. Your comments are greatly appreciated and helped to substantially improve the article. We provide detailed responses to each comment below.}
+
+
+
+\begin{itemize}
+
+
+
+
+\item On page 6, line 148, 149 there is a small mistake about the definition of the soft and hard constraints.\\
+\textit{Thanks for pointing out that some clarity is missing in this description. We assume that the use of the word \textnormal{criteria} is mixed up as the hard tuning goals are actually inequality constraints and the soft goals are minimization criteria. To clarify that, we changed the formulation in the text to: \\
+\textcolor{blue}{
+The software tools allow an intuitive definition of tuning requirements in the frequency domain (e.g., bandwidth) and in the time domain (e.g., rise time)  as either minimization criteria (soft requirements) or as inequality constraint (hard requirements).
+}}
+
+
+\item In Section 3 it is mentioned that the model of the aircraft is reduced based on [14, 15]. How sensitive is the proposed methodology to the order of the system?  \\
+\textit{Thanks your for this interesting remark.  For the blending approach presented in Section 2, there is actually no need to reduce the system, which is an implicit strength of the method. For the optimization approach described in Section 3 the calculation time increases with the order of the system. The main motivation, however, is that the available model is the result of the development process, i.e., was developed to analyze the flutter phenomena. Thus, it is not really a control orientated model.
+The full aeroelastic model has about 1000 states (in case of the rigid and flexible wing-set), including flexible modes and numerous aerodynamic lag states within and also beyond the frequency range of interest. Based on your comment and to make that clear in the article, we modified the corresponding paragraph in Section 3 to provide a little bit more insight:}\\
+\textit{\textcolor{blue}{
+For the model based approach, a low order, Linear Parameter-Varying (LPV) model of the FLEXOP demonstrator  has been derived in \cite{luspay18a, Luspay18} via linearization and advanced model order reduction techniques.
+The order reduction of the full aeroservoelastic model described in \cite{Wuestenhagen18} was performed to facilitate the optimization-based control design as the full aeroservoelastic model includes modes at frequencies far beyond the targeted flutter frequencies. The high order model is the result from detailed structural and aerodynamic computations required during the aircraft design process and is not well suited for the actual control design.
+}}
+
+\newpage
+
+\item Based on paragraph 3 of Section 4, the reader gets the information that only the outer ailerons are used for the input blending. What is the reason for this restriction instead of using all possible control surfaces?\\
+\textit{Thanks for pointing out that there is more insight needed on this point. The use of only one pair of ailerons for flutter control, which requires sufficiently fast actuators, was actually a decision during the development process. As the aircraft is supposed to fly fully autonomously it was decided to dedicate two pairs of control surfaces to the steering of the aircraft providing enough control authority in any case. The third pair is  only used  during the approach phase as high lift device. To not make things too complicated from a design control perspective right from the start, no superposition of the control signals are intended on the aircraft. We added the following clarification in the article:}
+\textit{\textcolor{blue}{
+This rigorous dedication of each aileron pair to a single task is taken to simplify the control design tasks and avoid superposition of baseline and flutter control signals in the actuator commands during  aircraft operation. The latter could result in actuator saturation which needs to be absolutely avoided to ensure stabilization of the flutter modes.
+}}
+
+
+\item Is the baseline controller designed based on the model of the rigid wing set aircraft?\\ 
+\textit{Indeed this is true. We designed with the rigid wing-set model as it was available first (and is less complex) and then tested the controller with both wing-set.}\\
+\textit{\textcolor{blue}{
+The aircraft model used for the baseline controller design has the form (12)-(13)  and represents the aircraft with the rigid wing-set.
+This model is substantially less complex than the model with the flexible wing-set. However, as the rigid body modes are barely changing with the wing-set, the baseline controller is used for both wing-sets. To not interfere with the flutter controller or excite flutter modes when using the flexible wing-set, adequate roll-off filter are included in the the design.
+}}
+
+\item  Are the pole migrations depicted in Figure 8 including the baseline controller as well, or only the open loop model with the flutter suppression controller? If not, does the baseline controller influence the linear analysis significantly? Perhaps a figure including the baseline controller can be helpful.\\
+\textit{
+	Thanks for spotting this mistake! Indeed the 'open loop' poles are actually the closed loop poles with the baseline controller included. We changed the figure label and the corresponding discussion accordingly.
+}
+
+\item Which sensors ended up being dominant based on the proposed blending method? Does the blend correspond to what it would be expected from basic physical considerations?\\
+\textit{As described in Section 2.1 (as well as mentioned in Section 4.2.1), the blending vectors are related to the shape of the mode to be controlled and hence correspond to what would be physically expected.  For instance, sensors as well as actuators are automatically blended symmetrically and asymmetrically for the symmetric and asymmetric flutter mode, respectively. \textit{\textcolor{blue}{ Furthermore, sensors at the outer part of the wing are better suited to measure the corresponding flutter modes and hence are higher weighted in the output blending vector. }} Since rotational rates and vertical acceleration measurements are considered for flutter suppression, a normalization of the different units ($rad/s$ and $m/s^2)$ is carried out as proposed in \cite{Pusch2018}. We elaborated a bit more in Section 4.2.1 on this to provide some more insight by including the above statement (adding the blue part above).}\\
+		
+		
+
+
+\item How computationally demanding is the proposed method?\\
+\textit{Computational-wise, the design of the $\mathcal{H}_2$-optimal blending vectors has been transformed in \cite{Pusch2018, Pusch18a} to an unconstrained optimization problem in a single variable, which is very low computationally demanding, and a subsequent singular value decomposition. We included a comment on this in Section 2.2 before the last paragraph:}\\
+\textit{\textcolor{blue}{
+With the proposed transformations, the  computational demands of the design method are low and the optimized blending vectors can be designed within fractions of a second even for complex, high order models.
+}}
+
+\item What results could be expected if the baseline controller is included in the input/output blending based flutter suppression design. This approach could ensure there is no unwanted coupling between the baseline and the flutter suppression controller.\\
+\textit{Thanks you for this well thought proposition. Indeed, this sequential loop closure is the topic we are currently working on as well as the possibility of an integrated design, i.e., designing both controllers together.
+We do expect a possible reduction of the iterative nature of the design task and maybe even better performance. However, including this already in the article would go beyond the scope of the article. The parallel design performed and described in the article is caused by the availability of the different models (rigid and flexible) as well as the conduction of the designs at the same time by different teams. However, the roll-off filter added to the baseline controller and the bandpass filter of the flutter suppression controller ensure that there is no unwanted coupling of the two controllers.} 
+
+\end{itemize}
+
+
+
+
+
+
+
+
+\bibliographystyle{abbrv}
+\bibliography{aerospace2}
+\end{document}
+
+
+

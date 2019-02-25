@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage{graphicx,color}
+\usepackage[scale=0.70]{geometry}
+\usepackage{enumitem}
+\usepackage{soul}
+\newcommand{\e}[1]{{\color{red}#1}}
+
+
+\begin{document}
+
+\title{\textsf{Response to Reviewer \#2 } \\ [+2mm]  \small{Structured Control Design for a Highly Flexible Flutter Demonstrator}
+\\ [+2mm]
+M. Pusch, D. Ossmann, and T. Luspay}
+
+\date{}
+\maketitle
+
+\textbf{We'd like to  thank the reviewer for spending his or her valuable time to review our article. Your comments are greatly appreciated and helped to substantially improve the article. We provide detailed responses to each comment below.}
+
+
+
+\section{Content:}
+
+\begin{itemize}
+	\item Line 11: More detail should be provided in the abstract about the "non-smooth optimization techniques"\\
+	\textit{Thank you for the comment on this. We gave it some thoughts and decided to remove the term "non-smooth optimization techniques" in the abstract. The simple fact is that these techniques are not newly developed in the article but are available in software packages. In this way we can focus on the new elements the article provides. Thus, the details on how the defined problems are solved are discussed later in the article and the according references are provided.}\\
+
+
+	\item Line 12: A simulation campaign is mentioned but the software is not specified in the abstract.  The abstract should be clearer about the software used for the simulations.\\
+	\textit{Thank you for this comment. We adapted the last part of the abstract as follows:}\\
+	\textit{\textcolor{blue}{
+	The developed control system, including baseline and flutter control algorithms, is verified in an extensive simulation campaign using a high fidelity simulator. The simulator is embedded in MATLAB and features \underline{a} non-linear model of the aircraft dynamics itself as well as detailed sensor and actuator descriptions.}}
+	
+	
+	
+
+	\item Near Equation 5 there is the line "the findings in [13] are applied"; however, these findings are not summarized in the manuscript.  Given that [13] is in listed as only submitted to Transactions of Control System Technology, the key findings should be mentioned in this manuscript.  A reader may not have access to this other paper.
+	\textit{Thanks for pointing out that some clarity is missing here. To improve this, we added the relevant contribution of \cite{Pusch2018} in the article, which is published and contains the major findings required. \cite{Pusch18a} formally extends the methodology to unstable systems which is required for this article. Thus, these findings are explicitly described in the last paragraph of Section 2.}\\
+
+	
+	
+	\item Line 299: The statement: "The outer loops ... five times slower"  needs elaboration.  Was this 5 times slower outer loops deliberate or a result of other design constraints? \\
+	\textit{Thanks for this comment. Actually, we demanded a five times lower bandwidth of each successive, cascaded control loop for sufficient separation of the cascaded loops. We clarified this by adding the following discussion in the article:}\\
+	\textit{\textcolor{blue}{
+	For the outer loops, an adequate frequency separation is commonly required within the cascade controller design.
+	The bandwidth of each cascaded loop is constrained by the lower-level control loops with the ultimate constraints being the servo actuator bandwidths.  While the available servo actuators on the FLEXOP aircraft provide a sufficiently high bandwidth for the inner loop designs, the inner  and outer loops need to be frequency separated from each other. Thus, the bandwidth design constrains for the outer loop are set to be five times lower than the bandwidths of their according inner loops.}}
+	
+
+	\item Line 310: Evidence should be provided that the flutter modes are decoupled through the $H_2$ blending approach.  Some definitions of flutter rely on the concept that modes combine to trigger flutter.  If the modes are decoupled, then flutter may not occur according to those definitions.\\
+	\textit{Thanks for this comment and initiating this important discussion. As mentioned in your comment, flutter phenomena often include coupled \textnormal{structural} modes as wing bending and torsion. In our case, we try to isolate the \textnormal{aeroelastic} modes which result from coupling the structural modes with aerodynamics. Thus, such an aeroelastic mode involves the structural coupling phenomena , e.g., wing bending and torsion, inducing the instability on the aircraft. Further, note that the $H_2$ blending establishes virtual signals which aim to decouple the aeroelastic modes (and not structural modes). If such an isolation is not possible, e.g., due to an insufficient number of sensors, the method cannot  provide an adequate solution. To evaluate that this is not an issue for the considered aircraft, we refer to the bode magnitude plots in Figure 6. Therein, the off diagonal plots are close to zero showing the decoupling of the flutter modes from each other. Additionally, the decoupling from the residual modes can be seen on the diagonal plots, where the flutter modes are clearly emphasized. For a better understanding, we sharpened the according sentence in the article as following:}\\
+	\textit{\textcolor{blue}{
+	As it can be seen in Figure 6, the two flutter modes are well decoupled by the determined blending vectors. The virtual inputs and outputs of both flutter modes do not interfere with each other which is indicated by the negligible small magnitude on the top right and bottom left graph in Figure 6.}}
+	
+	
+
+	\item Line 316: The outer pair of ailerons are used for flutter suppression.  There is a risk that if the ailerons are used for flutter suppression, control reversal may occur.  Was such a situation checked?  A control reversal study is not necessary for this article, but may be relevant for the test vehicle.\\
+	\textit{Thanks for this important comment. Indeed possible control reversal was checked during the design phase using the high fidelity models. However, it was concluded that these effects occur at far higher speeds then the targeted velocity range. Thanks again for this really important remark!}\\
+\end{itemize}
+
+
+
+
+\section{Presentation:}
+Thanks again to the reviewer for this detailed comments. We took all of your comments into account. Please find comets below where we thought they are necessary.
+
+\noindent
+Line 1: "This article presents" is a weak start to the abstract and could be improved.  The abstract is meant to be the article in miniature; therefore, starting immediately with the content will capture readers' attention sooner.\\
+Line 8: "from each other" is unnecessary\\
+Line 9: Replace "controlling them individually" with "individual control"\\
+Line 10: Replace "presented" with "used"\\
+Line 28: There is a typo: "aeroservorelastic"\\
+Line 34: Figure 1 should appear closer to this location given the cross-reference in the text\\
+Line 37: Replace "and thereby extend" with "thereby extending"\\
+Line 54: Replace "boils down" with "reduces"\\
+Line 60: Lowercase t in "the" after the colon\\
+Line 61: "is posted" or should the word be "is posed"?\\
+Line 63: Replace "can be" with "are"\\
+Line 70: Typo with FLEXOP\\
+Line 85: Replace "can be" with "is".  In general, the reviewer recommends searching the document for any "can be"\\ and replace with a more active verb.\\
+Line 96: Replace "can quickly become" with "is"\\
+Line 98: Remove "In order"\\
+Line 98: Remove "up"\\
+Line 101: Replace "can be" with "is"\\
+Line 104: Replace "can be" with "are"\\
+Line 115: Replace "can hence be" with "is"\\
+Line 115: Remove "In order"\\
+Line 115: Remove "out" after "factoring"\\
+Line 132:  "iff" appears after maximum.  Is this correct in the sense of "if and only if" or was "if" intended?\\
+\textcolor{red}{\qquad It is indeed an \textit{if and only if}.} \\
+Line 133: Replace "can also be" with "is also"\\
+Line 138: Remove "in order"\\
+Line 147: Matlab is typically written as MATLAB\\
+Line 188: Avoid the use of "get" since this is a weak helping verb\\
+Line 212: Replace "are combining" with "combine"\\
+Line 228: Replace "back" with "dorsal surface"\\
+Line 277: Remove "Structure wise"\\
+Line 279: Replace "in dependence" with "independence"\\
+\textcolor{red}{\qquad Actually the meaning is different. To clarify we now use: }\textit{\textcolor{blue}{ Scheduling with indicated airspeed...}} \\
+Line 281: A comma is needed after "example"\\
+Line 282: Replace "is depending" with "depends"\\
+Line 285: Is "defer" correct or should it be "differ"?\\
+Line 292: Table 2 should appear closer to the cross-reference.  At the moment, the reader must advance to the next page to find Table 2.\\
+Line 295: Insert an between "as" and "optimization"\\
+Line 307: Replace "its" with "their"\\
+Line 314: Replace "intertial" with "inertial"\\
+Line 325: Remove "on the one hand" as this is too casual.\\
+Line 327: Remove "on the other hand"\\Line 341: Possible typo: "two respectively one"?\\
+Line 360: Replace "rather increased" with "increased rather"\\
+Line 378 to 380: The diagrams of Figure 9 are described out of order relative to (a) through (d).  The description should be in order.\\
+Line 394: The caption for Figure 10 has (a) through (d) out of order\\
+Line 395: Try to avoid using personal pronouns such as "we"\\
+Line 452: Remove "Therefore" \\
+
+
+
+
+
+
+
+
+
+\bibliographystyle{abbrv}
+\bibliography{aerospace2}
+
+
+\end{document}
+
+
+
